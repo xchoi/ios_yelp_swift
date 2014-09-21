@@ -8,14 +8,19 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource {
     var client: YelpClient!
     
+    @IBOutlet weak var searchResultsTableView: UITableView!
+    
     // You can register for Yelp API keys here: http://www.yelp.com/developers/manage_api_keys
-    let yelpConsumerKey = "vxKwwcR_NMQ7WaEiQBK_CA"
-    let yelpConsumerSecret = "33QCvh5bIF5jIHR5klQr7RtBDhQ"
-    let yelpToken = "uRcRswHFYa1VkDrGV6LAW2F8clGh5JHV"
-    let yelpTokenSecret = "mqtKIxMIR4iBtBPZCmCLEb-Dz3Y"
+    let yelpConsumerKey = "tV5P2vNd5sfezo9Zg5ehJQ"
+    let yelpConsumerSecret = "NOFcGIHf-If1VJQu8XZgfXV0xOg"
+    let yelpToken = "IkhVgqrQxnvpPYJKTDZl2MvhOAQTUpjO"
+    let yelpTokenSecret = "riI7XSxllbE3L2I7Oj_A2JjBLCo"
+    
+    var searchResults: NSArray?
+    var imageCache = [String : UIImage]()
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -23,11 +28,17 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var errorValue: NSError? = nil
         // Do any additional setup after loading the view, typically from a nib.
         client = YelpClient(consumerKey: yelpConsumerKey, consumerSecret: yelpConsumerSecret, accessToken: yelpToken, accessSecret: yelpTokenSecret)
         
         client.searchWithTerm("Thai", success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
-            println(response)
+            println("got a response")
+
+            let dictionary = JsonHelper.JSONParseDict(JsonHelper.JSONStringify(response))
+            self.searchResults = (dictionary["businesses"] as? NSArray)
+            self.searchResultsTableView!.reloadData()
+            
         }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
             println(error)
         }
@@ -38,6 +49,62 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchResults != nil {
+            println(searchResults!.count)
+            return searchResults!.count
+        }
+        println(0)
+        return 0
+    }
     
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        println("row")
+        println(indexPath.row)
+        let cell = searchResultsTableView.dequeueReusableCellWithIdentifier("com.codepath.yelpclient.searchresulttableviewcell") as SearchResultTableViewCell
+        
+        let searchResult = SearchResultModel(fromNSDictionary: self.searchResults![indexPath.row] as NSDictionary)
+        
+        cell.addressLabelView.text = searchResult.address
+        cell.businessNameLabelView.text = searchResult.name
+        cell.categoriesLabelView.text = ", ".join(searchResult.categories)
+        
+        println("displaying \(searchResult.name) at \(indexPath)")
+        
+        var image = self.imageCache[searchResult.imageUrl]
+//
+        if( image == nil ) {
+            // If the image does not exist, we need to download it
+            var imgURL: NSURL = NSURL(string: searchResult.imageUrl)
+            
+            // Download an NSData representation of the image at the URL
+            let request: NSURLRequest = NSURLRequest(URL: imgURL)
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+                if error == nil {
+                    image = UIImage(data: data)
+                    
+                    // Store the image in to our cache
+                    self.imageCache[searchResult.imageUrl] = image
+                    if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) {
+                        cellToUpdate.imageView?.image = image
+                        self.searchResultsTableView!.reloadData()
+                    }
+                }
+                else {
+                    println("Error: \(error.localizedDescription)")
+                }
+            })
+            
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), {
+                if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) {
+                    cellToUpdate.imageView?.image = image
+                }
+            })
+        }
+        
+        return cell
+    }
 }
 
