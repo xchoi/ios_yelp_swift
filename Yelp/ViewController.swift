@@ -66,7 +66,9 @@ class ViewController: UIViewController, UITableViewDataSource {
         let searchResult = SearchResultModel(fromNSDictionary: self.searchResults![indexPath.row] as NSDictionary)
         
         cell.addressLabelView.text = searchResult.address
+        cell.addressLabelView.sizeToFit()
         cell.businessNameLabelView.text = searchResult.name
+        cell.businessNameLabelView.sizeToFit()
         cell.categoriesLabelView.text = ", ".join(searchResult.categories)
         
         println("displaying \(searchResult.name) at \(indexPath)")
