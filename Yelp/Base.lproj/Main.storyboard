@@ -101,6 +101,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="hGo-0m-k80"/>
                     <connections>
+                        <outlet property="navigationItem" destination="hGo-0m-k80" id="zqX-ZT-BFW"/>
                         <outlet property="searchResultsTableView" destination="waq-Va-9Pa" id="IQl-6x-xP2"/>
                     </connections>
                 </viewController>

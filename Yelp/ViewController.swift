@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate {
     var client: YelpClient!
     
     @IBOutlet weak var searchResultsTableView: UITableView!
@@ -18,6 +18,9 @@ class ViewController: UIViewController, UITableViewDataSource {
     let yelpConsumerSecret = "NOFcGIHf-If1VJQu8XZgfXV0xOg"
     let yelpToken = "IkhVgqrQxnvpPYJKTDZl2MvhOAQTUpjO"
     let yelpTokenSecret = "riI7XSxllbE3L2I7Oj_A2JjBLCo"
+    let searchBar = UISearchBar(frame: CGRectZero)
+//    let filterButton = UIBarButtonItem(title: "Filter", style: .UIBarButtonItemStylePlain, target: self, action:"showFilterView")
+//    let filterButton : UIBarButtonItem = UIBarButtonItem(title: "Filter", style: .UIBarButtonItemStylePlain, target: self, action: "showFilterView")
     
     var searchResults: NSArray?
     var imageCache = [String : UIImage]()
@@ -29,19 +32,34 @@ class ViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         var errorValue: NSError? = nil
+        
+        self.navigationItem.titleView = searchBar
+        searchBar.delegate = self
+//        self.navigationItem.leftBarButtonItem = filterButton
+        
         // Do any additional setup after loading the view, typically from a nib.
         client = YelpClient(consumerKey: yelpConsumerKey, consumerSecret: yelpConsumerSecret, accessToken: yelpToken, accessSecret: yelpTokenSecret)
         
-        client.searchWithTerm("Thai", success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+        self.doSearch("thai")
+    }
+    
+    func doSearch(query: String) {
+        client.searchWithTerm(query, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             println("got a response")
-
+            
             let dictionary = JsonHelper.JSONParseDict(JsonHelper.JSONStringify(response))
             self.searchResults = (dictionary["businesses"] as? NSArray)
             self.searchResultsTableView!.reloadData()
             
-        }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
-            println(error)
+            }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                println(error)
         }
+    }
+    
+    func searchBarSearchButtonClicked( searchBar: UISearchBar!)
+    {
+        println("searching \(searchBar.text)")
+        self.doSearch(searchBar.text)
     }
     
     override func didReceiveMemoryWarning() {
