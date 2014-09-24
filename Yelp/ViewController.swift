@@ -36,7 +36,6 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
         self.navigationItem.titleView = searchBar
         searchBar.delegate = self
         searchBar.text = "thai"
-        self.filterBarButton.action = Selector("showFilterView:")
         self.filterBarButton.title = "Filter"
         self.filterBarButton.style = .Plain
         
@@ -47,21 +46,11 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        println("about to call segue")
-        println(sender)
-        println(segue)
-
-//        let selectedCell = sender as UITableViewCell
-//        let selectedIndex = self.movieTableView!.indexPathForSelectedRow()
-//        
-//        if let row = selectedIndex?.row {
-//            let movieDictionary = self.moviesArray![row] as NSDictionary;
-//            let movieDetailController = segue.destinationViewController as MovieDetailViewController;
-//            
-//            movieDetailController.movie = MovieModel(fromNSDictionary: movieDictionary)
-//        }
+//        println("about to call segue")
+//        println(sender)
+//        println(segue)
     }
-    
+
     func doSearch(query: String) {
         client.searchWithTerm(query, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             println("got a response")
