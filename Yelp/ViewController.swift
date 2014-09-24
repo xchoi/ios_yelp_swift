@@ -18,9 +18,9 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
     let yelpConsumerSecret = "NOFcGIHf-If1VJQu8XZgfXV0xOg"
     let yelpToken = "IkhVgqrQxnvpPYJKTDZl2MvhOAQTUpjO"
     let yelpTokenSecret = "riI7XSxllbE3L2I7Oj_A2JjBLCo"
-    let searchBar = UISearchBar(frame: CGRectZero)
-//    let filterButton = UIBarButtonItem(title: "Filter", style: .UIBarButtonItemStylePlain, target: self, action:"showFilterView")
-//    let filterButton : UIBarButtonItem = UIBarButtonItem(title: "Filter", style: .UIBarButtonItemStylePlain, target: self, action: "showFilterView")
+    
+    var searchBar:UISearchBar = UISearchBar(frame: CGRectZero)
+    @IBOutlet weak var filterBarButton: UIBarButtonItem!
     
     var searchResults: NSArray?
     var imageCache = [String : UIImage]()
@@ -35,12 +35,31 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
         
         self.navigationItem.titleView = searchBar
         searchBar.delegate = self
-//        self.navigationItem.leftBarButtonItem = filterButton
+        searchBar.text = "thai"
+        self.filterBarButton.action = Selector("showFilterView:")
+        self.filterBarButton.title = "Filter"
+        self.filterBarButton.style = .Plain
         
         // Do any additional setup after loading the view, typically from a nib.
         client = YelpClient(consumerKey: yelpConsumerKey, consumerSecret: yelpConsumerSecret, accessToken: yelpToken, accessSecret: yelpTokenSecret)
         
         self.doSearch("thai")
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        println("about to call segue")
+        println(sender)
+        println(segue)
+
+//        let selectedCell = sender as UITableViewCell
+//        let selectedIndex = self.movieTableView!.indexPathForSelectedRow()
+//        
+//        if let row = selectedIndex?.row {
+//            let movieDictionary = self.moviesArray![row] as NSDictionary;
+//            let movieDetailController = segue.destinationViewController as MovieDetailViewController;
+//            
+//            movieDetailController.movie = MovieModel(fromNSDictionary: movieDictionary)
+//        }
     }
     
     func doSearch(query: String) {

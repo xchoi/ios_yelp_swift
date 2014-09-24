@@ -99,8 +99,15 @@
                             <constraint firstAttribute="trailing" secondItem="waq-Va-9Pa" secondAttribute="trailing" id="TLQ-p6-XCM"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="hGo-0m-k80"/>
+                    <navigationItem key="navigationItem" id="hGo-0m-k80">
+                        <barButtonItem key="rightBarButtonItem" title="Filter" id="wYl-tA-Jfz">
+                            <connections>
+                                <segue destination="HS7-6q-AgP" kind="presentation" id="0W0-jV-Lf4"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="filterBarButton" destination="wYl-tA-Jfz" id="uyE-eC-A2l"/>
                         <outlet property="navigationItem" destination="hGo-0m-k80" id="zqX-ZT-BFW"/>
                         <outlet property="searchResultsTableView" destination="waq-Va-9Pa" id="IQl-6x-xP2"/>
                     </connections>
@@ -108,6 +115,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1157" y="263"/>
+        </scene>
+        <!--Filter View Controller-->
+        <scene sceneID="6gJ-Wf-p7K">
+            <objects>
+                <viewController id="HS7-6q-AgP" customClass="FilterViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="S6F-y0-kCq"/>
+                        <viewControllerLayoutGuide type="bottom" id="jML-M9-iMZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0km-Ag-rFT">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Test" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieP-v2-mQC">
+                                <rect key="frame" x="198" y="175" width="32" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cKl-C1-24o">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="Filter" id="lJl-Qh-xvc">
+                                        <barButtonItem key="leftBarButtonItem" title="Done" id="t1x-5g-LXg"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FHF-19-Xn0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1842" y="263"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="U4w-P8-bhA">
