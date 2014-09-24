@@ -140,6 +140,8 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
         options["sort"] = sortBy
         options["radius"] = radius
         options["deals"] = deals
+        self.doSearch(searchBar.text, options: options)
+        self.searchResultsTableView!.reloadData()
     }
 }
 
