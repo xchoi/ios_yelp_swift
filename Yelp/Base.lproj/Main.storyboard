@@ -102,7 +102,7 @@
                     <navigationItem key="navigationItem" id="hGo-0m-k80">
                         <barButtonItem key="rightBarButtonItem" title="Filter" id="wYl-tA-Jfz">
                             <connections>
-                                <segue destination="EaK-9o-79o" kind="presentation" id="RHb-oj-jYs"/>
+                                <segue destination="r2L-ZC-Azq" kind="show" id="e7D-us-O2s"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -116,124 +116,138 @@
             </objects>
             <point key="canvasLocation" x="1157" y="263"/>
         </scene>
-        <!--Filter View Controller-->
-        <scene sceneID="sIu-qB-JAl">
+        <!--Table View Controller-->
+        <scene sceneID="bhd-lg-uFJ">
             <objects>
-                <viewController id="EaK-9o-79o" customClass="FilterViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="FsB-3o-z7G"/>
-                        <viewControllerLayoutGuide type="bottom" id="ArL-Pa-kEm"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="c4t-J7-wex">
+                <tableViewController id="r2L-ZC-Azq" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="XoL-CQ-5fR">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n2g-Wn-5Xm">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
-                                <items>
-                                    <navigationItem title="Filter" id="2ga-bR-KkQ">
-                                        <barButtonItem key="leftBarButtonItem" title="Done" id="xLt-Ed-FgH">
-                                            <connections>
-                                                <action selector="doneButtonPushed:" destination="EaK-9o-79o" id="9X1-q2-OHv"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="blg-n1-g0v">
-                                <rect key="frame" x="0.0" y="76" width="600" height="528"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <sections>
-                                    <tableViewSection headerTitle="Category" id="Y1K-e5-MtT">
-                                        <cells>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="YKv-kV-eWH">
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YKv-kV-eWH" id="BmG-ti-xHO">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                        </cells>
-                                    </tableViewSection>
-                                    <tableViewSection headerTitle="Sort" id="Wyo-f3-CYe">
-                                        <cells>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="oNM-g1-t9D">
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oNM-g1-t9D" id="z7z-Os-Pwi">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="MBm-Uh-lm5">
-                                                            <rect key="frame" x="143" y="8" width="314" height="29"/>
-                                                            <segments>
-                                                                <segment title="Best Match"/>
-                                                                <segment title="Distance"/>
-                                                                <segment title="Highest Rated"/>
-                                                            </segments>
-                                                        </segmentedControl>
-                                                    </subviews>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                        </cells>
-                                    </tableViewSection>
-                                    <tableViewSection headerTitle="Radius" id="Bkf-gp-YJB">
-                                        <cells>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="0Bz-9a-hOz">
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Bz-9a-hOz" id="PWp-dU-hJ6">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cpQ-kH-4af">
-                                                            <rect key="frame" x="119" y="8" width="363" height="29"/>
-                                                            <segments>
-                                                                <segment title="Auto"/>
-                                                                <segment title="2 blocks"/>
-                                                                <segment title="6 blocks"/>
-                                                                <segment title="1 mile"/>
-                                                                <segment title="6 miles"/>
-                                                            </segments>
-                                                        </segmentedControl>
-                                                    </subviews>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                        </cells>
-                                    </tableViewSection>
-                                    <tableViewSection headerTitle="Deals" id="e4z-Za-r6L">
-                                        <cells>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="s5g-tO-mWD">
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s5g-tO-mWD" id="5o4-9f-coQ">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="oer-sR-9aQ">
-                                                            <rect key="frame" x="528" y="5" width="51" height="31"/>
-                                                        </switch>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Show only businesses with deals" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wO8-Pl-WtC">
-                                                            <rect key="frame" x="13" y="11" width="253" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                        </cells>
-                                    </tableViewSection>
-                                </sections>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="dealsSwitch" destination="oer-sR-9aQ" id="8al-qZ-pvX"/>
-                        <outlet property="doneBarButton" destination="xLt-Ed-FgH" id="aKr-0S-wxg"/>
-                        <outlet property="filterTableView" destination="blg-n1-g0v" id="FOk-cU-f8d"/>
-                        <outlet property="radiusSegmentedControl" destination="PWp-dU-hJ6" id="ruN-jr-RLE"/>
-                        <outlet property="sortSegmentedControl" destination="MBm-Uh-lm5" id="cfl-ye-JoM"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h9o-7M-HFy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <sections>
+                            <tableViewSection headerTitle="Radius" id="9PH-Ux-Db7">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="hVa-xZ-oQh">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hVa-xZ-oQh" id="Noi-4c-K7w">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fBU-J1-vIR">
+                                                    <rect key="frame" x="119" y="8" width="363" height="29"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="363" id="usD-uS-bG2"/>
+                                                    </constraints>
+                                                    <segments>
+                                                        <segment title="Auto"/>
+                                                        <segment title="2 blocks"/>
+                                                        <segment title="6 blocks"/>
+                                                        <segment title="1 mile"/>
+                                                        <segment title="6 miles"/>
+                                                    </segments>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="usD-uS-bG2"/>
+                                                        </mask>
+                                                    </variation>
+                                                </segmentedControl>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="fBU-J1-vIR" firstAttribute="top" secondItem="Noi-4c-K7w" secondAttribute="topMargin" id="Gz9-Yq-RhX"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="fBU-J1-vIR" secondAttribute="trailing" constant="20" id="gwU-B9-AD3"/>
+                                                <constraint firstItem="fBU-J1-vIR" firstAttribute="leading" secondItem="Noi-4c-K7w" secondAttribute="leadingMargin" constant="20" id="hN9-ga-3Nk"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Sort" id="8ID-Ig-OaU">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="to7-Co-Dra">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="to7-Co-Dra" id="bng-Aj-l2H">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="EIw-NX-xtb">
+                                                    <rect key="frame" x="143" y="8" width="314" height="29"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="314" id="3b3-e5-t1r"/>
+                                                    </constraints>
+                                                    <segments>
+                                                        <segment title="Best Match"/>
+                                                        <segment title="Distance"/>
+                                                        <segment title="Highest Rated"/>
+                                                    </segments>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="3b3-e5-t1r"/>
+                                                        </mask>
+                                                    </variation>
+                                                </segmentedControl>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="EIw-NX-xtb" firstAttribute="top" secondItem="bng-Aj-l2H" secondAttribute="topMargin" id="9Xw-cm-Xry"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="EIw-NX-xtb" secondAttribute="trailing" constant="20" id="GqZ-aR-lfM"/>
+                                                <constraint firstItem="EIw-NX-xtb" firstAttribute="leading" secondItem="bng-Aj-l2H" secondAttribute="leadingMargin" constant="20" id="ezJ-FC-Dc3"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Category" id="HYF-Yl-yy4">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ViA-BT-q7P">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ViA-BT-q7P" id="STe-tM-LMu">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Deals" id="dph-26-hwY">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="2Xo-Gn-igZ">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Xo-Gn-igZ" id="Hip-D9-81m">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hNI-lw-8Dr">
+                                                    <rect key="frame" x="528" y="5" width="51" height="31"/>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Show only businesses with deals" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1HK-65-1xe">
+                                                    <rect key="frame" x="8" y="11" width="253" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="1HK-65-1xe" firstAttribute="top" secondItem="Hip-D9-81m" secondAttribute="topMargin" constant="10" id="5VT-Qb-R7N"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="hNI-lw-8Dr" secondAttribute="trailing" constant="15" id="Cgm-8d-x84"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="1HK-65-1xe" secondAttribute="bottom" constant="10" id="LNa-bp-04v"/>
+                                                <constraint firstItem="hNI-lw-8Dr" firstAttribute="top" secondItem="Hip-D9-81m" secondAttribute="topMargin" constant="-3" id="LaK-qJ-Hb2"/>
+                                                <constraint firstItem="1HK-65-1xe" firstAttribute="leading" secondItem="Hip-D9-81m" secondAttribute="leadingMargin" constant="10" id="Zww-mi-Y7t"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="r2L-ZC-Azq" id="XaA-lQ-8xm"/>
+                            <outlet property="delegate" destination="r2L-ZC-Azq" id="wSB-Qq-if7"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="57S-de-mbR"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1zL-Wv-0wU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationItem title="Filter" id="y3C-1Z-Y0l">
+                    <barButtonItem key="rightBarButtonItem" title="Done" id="6RR-gX-ocn"/>
+                </navigationItem>
             </objects>
-            <point key="canvasLocation" x="1900" y="263"/>
+            <point key="canvasLocation" x="1836" y="251"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="U4w-P8-bhA">

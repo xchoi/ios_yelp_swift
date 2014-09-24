@@ -13,7 +13,7 @@ protocol FilterViewControllerDelegate{
     func filtersSet(controller:FilterViewController, sortBy:Int, radius:Int, deals:Bool)
 }
 
-class FilterViewController: UIViewController {
+class FilterViewController: UITableViewController {
     
     var delegate:FilterViewControllerDelegate? = nil
  
@@ -21,7 +21,7 @@ class FilterViewController: UIViewController {
     
     @IBOutlet weak var filterTableView: UITableView!
     @IBOutlet weak var sortSegmentedControl: UISegmentedControl!
-    @IBOutlet weak var radiusSegmentedControl: UIView!
+    @IBOutlet weak var radiusSegmentedControl: UISegmentedControl!
     @IBOutlet weak var dealsSwitch: UISwitch!
     
     
@@ -35,6 +35,11 @@ class FilterViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    
+    override func viewWillAppear(animated: Bool) {
+        if delegate != nil {
+            delegate!.filtersSet(self, sortBy: sortSegmentedControl.selectedSegmentIndex, radius: radiusSegmentedControl.selectedSegmentIndex, deals: dealsSwitch.on)
+        }
+        super.viewWillDisappear(animated)
+    }
     
 }

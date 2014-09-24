@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate, FilterViewControllerDelegate {
     var client: YelpClient!
     
     @IBOutlet weak var searchResultsTableView: UITableView!
@@ -35,14 +35,14 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
         
         self.navigationItem.titleView = searchBar
         searchBar.delegate = self
-        searchBar.text = "thai"
+        searchBar.text = "sushi"
         self.filterBarButton.title = "Filter"
         self.filterBarButton.style = .Plain
         
         // Do any additional setup after loading the view, typically from a nib.
         client = YelpClient(consumerKey: yelpConsumerKey, consumerSecret: yelpConsumerSecret, accessToken: yelpToken, accessSecret: yelpTokenSecret)
         
-        self.doSearch("thai")
+        self.doSearch(searchBar.text, options: NSDictionary())
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -51,8 +51,8 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
 //        println(segue)
     }
 
-    func doSearch(query: String) {
-        client.searchWithTerm(query, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+    func doSearch(query: String, options: NSDictionary) {
+        client.searchWithTerm(query, options: options, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             println("got a response")
             
             let dictionary = JsonHelper.JSONParseDict(JsonHelper.JSONStringify(response))
@@ -67,7 +67,7 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
     func searchBarSearchButtonClicked( searchBar: UISearchBar!)
     {
         println("searching \(searchBar.text)")
-        self.doSearch(searchBar.text)
+        self.doSearch(searchBar.text, options: NSDictionary())
     }
     
     override func didReceiveMemoryWarning() {
@@ -133,6 +133,13 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
         }
         
         return cell
+    }
+    
+    func filtersSet(controller: FilterViewController, sortBy: Int, radius: Int, deals: Bool) {
+        let options = NSMutableDictionary()
+        options["sort"] = sortBy
+        options["radius"] = radius
+        options["deals"] = deals
     }
 }
 
